@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
@@ -29,13 +28,11 @@ public class DrinkCategoryActivity extends Activity {
         SQLiteOpenHelper starbuzzDatabaseHelper = new StarbuzzDatabaseHelper(this);
         try {
             mDb = starbuzzDatabaseHelper.getReadableDatabase();
-            // SUPER-SOS: mCursor MUST return _id if it's used by a cursor-adapter for a list. The
-            // cursor-adapter will actually return _id as id in onItemClick below!!!
             mCursor = mDb.query("drink",
                     new String[]{"_id", "name"},
                     null, null, null, null, "name");
 
-            CursorAdapter listAdapter = new SimpleCursorAdapter(this,
+            SimpleCursorAdapter listAdapter = new SimpleCursorAdapter(this,
                     android.R.layout.simple_list_item_1, mCursor,
                     new String[]{"name"}, new int[]{android.R.id.text1}, 0);
 
@@ -53,9 +50,6 @@ public class DrinkCategoryActivity extends Activity {
         });
     }
 
-    // SOS: If there are many items, the cursor-adapter asks the mCursor only for the first few
-    // (visible) items. If the user later scrolls down, it asks for the next items etc. Therefore, I
-    // must keep mCursor & mDb open for all the duration that the adapter might use them...
     @Override
     protected void onDestroy() {
         super.onDestroy();

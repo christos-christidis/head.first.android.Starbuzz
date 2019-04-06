@@ -8,7 +8,7 @@
     tools:context=".TopLevelActivity">
 
     <ImageView
-        android:id="@+id/logo_image"
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:contentDescription="@string/starbuzz_logo"
@@ -19,5 +19,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/options"
+        tools:layout_height="150dp"
+        tools:listitem="@android:layout/simple_list_item_1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/favorites"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+    <ListView
+        android:id="@+id/list_favorites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_height="150dp"
         tools:listitem="@android:layout/simple_list_item_1" />
 </LinearLayout>

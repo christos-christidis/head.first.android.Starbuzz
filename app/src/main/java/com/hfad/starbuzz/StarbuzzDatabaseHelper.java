@@ -24,13 +24,9 @@ class StarbuzzDatabaseHelper extends SQLiteOpenHelper {
         updateMyDatabase(db, oldVersion);
     }
 
-    // SOS: this is how we avoid code duplication between onCreate and onUpgrade. Also note the right
-    // way of applying successive updates until we reach the current version.
-    // 2nd SOS: according to book, Android is hardwired to expect the _id field, so we include it.
     private void updateMyDatabase(SQLiteDatabase db, int oldVersion) {
         if (oldVersion < 1) {
-            db.execSQL("CREATE TABLE drink(" +
-                    "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            db.execSQL("CREATE TABLE drink(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "name TEXT, " +
                     "description TEXT, " +
                     "image_resource_id INTEGER);");
@@ -46,7 +42,6 @@ class StarbuzzDatabaseHelper extends SQLiteOpenHelper {
     }
 
     private void insertDrink(SQLiteDatabase db, String name, String description, int resourceId) {
-        // SOS: this is just a map from String names to values
         ContentValues rowValues = new ContentValues();
         rowValues.put("name", name);
         rowValues.put("description", description);
