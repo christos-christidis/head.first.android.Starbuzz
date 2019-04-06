@@ -15,7 +15,8 @@ public class TopLevelActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_level);
 
-        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+        ListView listCategories = findViewById(R.id.list_categories);
+        listCategories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
@@ -25,9 +26,6 @@ public class TopLevelActivity extends Activity {
                     Toast.makeText(TopLevelActivity.this, "Not implemented!", Toast.LENGTH_SHORT).show();
                 }
             }
-        };
-
-        ListView listView = findViewById(R.id.list_options);
-        listView.setOnItemClickListener(itemClickListener);
+        });
     }
 }
