@@ -28,7 +28,6 @@ public class TopLevelActivity extends Activity {
         setupListFavorites();
     }
 
-    // As before, this list's data is hardcoded w android:entries
     private void setupListCategories() {
         ListView listCategories = findViewById(R.id.list_categories);
 
@@ -79,9 +78,6 @@ public class TopLevelActivity extends Activity {
                 null, null, "name");
     }
 
-    // SOS: When I return here by pressing Back after I've made changes to favorites in DrinkActivity,
-    // those changes won't be reflected in the favorites-list. The old cursor does not refresh its view
-    // of the data, therefore I have to create a new one!
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -90,12 +86,10 @@ public class TopLevelActivity extends Activity {
         CursorAdapter adapter = (CursorAdapter) listFavorites.getAdapter();
 
         Cursor newCursor = queryFavorites();
-        adapter.changeCursor(newCursor); // NOTE: this closes the old cursor
+        adapter.changeCursor(newCursor);
         mFavoritesCursor = newCursor;
     }
 
-    // SOS: Like I said in StarbuzzV2, every time we have a list w data coming from the db, we should
-    // keep the db & cursor open as long as possible, cause scrolling might lead to new fetches.
     @Override
     protected void onDestroy() {
         super.onDestroy();

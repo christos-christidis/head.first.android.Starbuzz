@@ -48,4 +48,5 @@ class StarbuzzDatabaseHelper extends SQLiteOpenHelper {
         rowValues.put("image_resource_id", resourceId);
         db.insert("drink", null, rowValues);
     }
+
 }
